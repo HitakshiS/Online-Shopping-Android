@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_list_container"
+    android:background="#FFEFD5"
+    android:padding="5dp"
+    android:layout_margin="10dp"
+    >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintWidth_percent="0.35"
+            android:id="@+id/imageView"
+            android:scaleType="fitXY"
+            android:src="@drawable/broccoli"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+        />
+
+        <LinearLayout
+            android:id="@+id/sub_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignStart="@id/imageView"
+            android:orientation="vertical"
+            android:paddingLeft="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintHeight_percent="1">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="Product: Broccoli"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/quantityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameTextView"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="Quantity: 0"
+                android:textSize="16dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameTextView"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="Price: 50"
+                android:textSize="16dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/stockTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameTextView"
+                android:layout_toRightOf="@+id/imageView"
+                android:text="In stock"
+                android:textSize="16dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#008000" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/quantity_change"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sub_container"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingLeft="15dp"
+            app:layout_constraintWidth_percent="0.15" />
+</androidx.constraintlayout.widget.ConstraintLayout>

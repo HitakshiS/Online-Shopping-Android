@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list_container"
+        android:background="#FFEFD5"
+    >
+
+        <include
+            layout="@layout/header_custom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/include" />
+
+            <ImageView
+                android:id="@+id/image_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.37"
+                android:contentDescription="Broccoli"
+                android:scaleType="fitXY"
+                android:src="@drawable/broccoli"
+                app:layout_constraintBottom_toTopOf="@id/sub_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
+
+            <LinearLayout
+                android:id="@+id/sub_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.45"
+                android:layout_alignStart="@id/imageView"
+                android:orientation="vertical"
+                android:paddingLeft="13dp"
+                app:layout_constraintLeft_toLeftOf="@id/image_item_view"
+                app:layout_constraintRight_toRightOf="@id/image_item_view"
+                app:layout_constraintTop_toBottomOf="@id/image_item_view">
+
+                <TextView
+                    android:id="@+id/name_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Product: Broccoli"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/quantity_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity: 0"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/price_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price: 50"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/stock_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="In stock"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#008000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/description_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description: "
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+    <include
+        layout="@layout/list_detail_quantity_change"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_container"
+        app:layout_constraintHeight_percent="0.10"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
