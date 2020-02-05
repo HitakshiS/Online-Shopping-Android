@@ -4,14 +4,28 @@
     android:layout_height="wrap_content"
     android:id="@+id/custom_header_container"
     android:background="#F4A460"
-    android:paddingVertical="10dp">
+    android:paddingVertical="10dp"
+    android:weightSum="10">
     <TextView
         android:text="Home"
-        android:textSize="26sp"
+        android:textSize="32sp"
         android:id="@+id/header_text"
         android:textColor="#111111"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_width="match_parent"
+        android:gravity="start"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
+        />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/cart_imageView"
+        android:scaleType="center"
+        android:src="@drawable/cart"
+        android:layout_weight="1"
+        android:visibility="visible"
         />
 </LinearLayout>

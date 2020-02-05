@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nameTextView"
                 android:layout_toRightOf="@+id/imageView"
-                android:text="In stock"
+                android:text="In Stock"
                 android:textSize="16dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#008000" />

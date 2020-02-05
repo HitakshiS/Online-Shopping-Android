@@ -10,15 +10,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.onlineshoppingandroid.R;
-import com.example.onlineshoppingandroid.activities.HomeScreen;
+import com.example.onlineshoppingandroid.activities.HomeData;
 
-public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
+import java.util.ArrayList;
+
+public class HomeAdapter extends ArrayAdapter<HomeData> {
     Context mContext;
-    HomeScreen.Home[] mData = null;
+    ArrayList<HomeData> mData = null;
     int mLayoutResourceId;
 
 
-    public HomeAdapter(Context context, int resource, HomeScreen.Home[] data) {
+    public HomeAdapter(Context context, int resource, ArrayList<HomeData> data) {
         super(context, resource, data);
         this.mContext = context;
         this.mData = data;
@@ -26,7 +28,7 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
     }
 
     @Override
-    public HomeScreen.Home getItem(int position) {
+    public HomeData getItem(int position) {
         return super.getItem(position);
     }
 
@@ -44,9 +46,8 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
             holder.nameView =  row.findViewById(R.id.nameTextView);
             holder.price =  row.findViewById(R.id.priceTextView);
             holder.stock =  row.findViewById(R.id.stockTextView);
-            holder.quantityView =  row.findViewById(R.id.quantityTextView);
+            holder.quantityTextView =  row.findViewById(R.id.quantityTextView);
             holder.imageView =  row.findViewById(R.id.imageView);
-
 
             row.setTag(holder);
         }
@@ -54,18 +55,37 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
             holder = (HomeHolder) row.getTag();
         }
 
-        final HomeScreen.Home home = mData[position];
+        final HomeData home = mData.get(position);
 
         final Button increase = row.findViewById(R.id.increase_button);
         final Button decrease = row.findViewById(R.id.decrease_button);
-        final TextView quantityTextView = row.findViewById(R.id.quantity_text);
+        final TextView quantityTextView = row.findViewById(R.id.quantityTextView);
+        final TextView quantityView = row.findViewById(R.id.quantity_text);
         final TextView stockTextView = row.findViewById(R.id.stockTextView);
+
+
+        if(home.getmQuantity() == 0 ){
+            decrease.setBackgroundColor(Color.rgb(169, 169, 169));
+            stockTextView.setTextColor(Color.rgb(0, 128, 0));
+        }
+        else if(home.getmQuantity() < home.getmStock()){
+            decrease.setBackgroundColor(Color.rgb(244, 164, 96));
+            stockTextView.setTextColor(Color.rgb(0, 128, 0));
+        }
+        else if (home.getmQuantity() >= home.getmStock()){
+            stockTextView.setText("Out of Stock");
+            increase.setBackgroundColor(Color.rgb(169, 169, 169));
+            decrease.setBackgroundColor(Color.rgb(244, 164, 96));
+            stockTextView.setTextColor(Color.rgb(255, 0, 0));
+        }
+
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 home.addToQuantity();
                 int quantity = home.getmQuantity();
-                quantityTextView.setText(String.valueOf(quantity));
+                quantityTextView.setText("Quantity: " +quantity);
+                quantityView.setText(String.valueOf(quantity));
                 int stock = home.getmStock();
                 decrease.setBackgroundColor(Color.rgb(244, 164, 96));
                 if(quantity<stock){
@@ -83,11 +103,12 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
             }
         });
         decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                @Override
+                public void onClick(View view) {
                 home.removeFromQuantity();
                 int quantity = home.getmQuantity();
-                quantityTextView.setText(String.valueOf(quantity));
+                quantityTextView.setText("Quantity: " + quantity);
+                quantityView.setText(String.valueOf(quantity));
                 int stock = home.getmStock();
                 if(quantity>stock){
                     increase.setBackgroundColor(Color.rgb(169, 169, 169));
@@ -106,13 +127,14 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
             }
         });
 
-        String nameValue = "Product: "+ home.mNameProduct;
+        String nameValue = "Product: "+ home.getmNameProduct();
         String quantityValue = "Quantity: " + home.getmQuantity();
-        String priceValue = "Price: " + home.mPrice;
+        String priceValue = "Price: " + home.getmPrice();
         holder.nameView.setText(nameValue);
         holder.price.setText(priceValue);
-        holder.quantityView.setText(quantityValue);
-        int resId = mContext.getResources().getIdentifier(home.mNameOfImage,"drawable",mContext.getPackageName());
+        quantityView.setText(String.valueOf(home.getmQuantity()));
+        holder.quantityTextView.setText(quantityValue);
+        int resId = mContext.getResources().getIdentifier(home.getmNameOfImage(),"drawable",mContext.getPackageName());
         holder.imageView.setImageResource(resId);
 
         return row;
@@ -122,7 +144,7 @@ public class HomeAdapter  extends ArrayAdapter<HomeScreen.Home> {
         TextView nameView;
         TextView price;
         TextView stock;
-        TextView quantityView;
+        TextView quantityTextView;
         ImageView imageView;
     }
 }

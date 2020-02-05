@@ -20,6 +20,10 @@
             android:name=".activities.ItemDetail"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activities.CartScreen"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

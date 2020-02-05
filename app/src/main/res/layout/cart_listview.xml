@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cart_list_container"
+    android:background="#FFEFD5"
+    android:padding="5dp"
+    android:layout_margin="10dp"
+    >
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintWidth_percent="0.35"
+        android:id="@+id/cart_image"
+        android:scaleType="fitXY"
+        android:src="@drawable/broccoli"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/cart_sub_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignStart="@id/cart_image"
+        android:orientation="vertical"
+        android:paddingLeft="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cart_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintHeight_percent="1">
+
+        <TextView
+            android:id="@+id/cart_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:textSize="16dp"
+            android:text="Product: Broccoli"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/cart_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount: 0"
+            android:textSize="16dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/cart_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In Stock"
+            android:textSize="16dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#008000" />
+
+        <ImageView
+            android:id="@+id/delete_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/delete_item"
+            android:tint="#F44336"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/quantity_change"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cart_sub_container"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="15dp"
+        app:layout_constraintWidth_percent="0.15" />
+</androidx.constraintlayout.widget.ConstraintLayout>
