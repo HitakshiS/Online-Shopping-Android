@@ -1,29 +1,27 @@
 package com.example.onlineshoppingandroid.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.onlineshoppingandroid.R;
 import com.example.onlineshoppingandroid.adapters.CartAdapter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class CartScreen extends Activity {
 
     CartAdapter mCartAdapter = null;
     ListView mListView = null;
     DataSingleton ourInstance = DataSingleton.getInstance();;
-//    private ArrayList<HomeData> list = null;
-    private ArrayList<CartData> cartList = new ArrayList<>();
+    private ArrayList<HomeData> homeList = new ArrayList<>();
+    private ArrayList<HomeData> cartList = new ArrayList<>();
+    int totalAmountItems = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +31,25 @@ public class CartScreen extends Activity {
         TextView customHeaderText = findViewById(R.id.header_text);
         ImageView cartImage = findViewById(R.id.cart_imageView);
         Button payment = findViewById(R.id.payment_button);
+        TextView totalAmount = findViewById(R.id.cart_total_amount);
 
         customHeaderText.setText("Cart");
         cartImage.setVisibility(View.INVISIBLE);
 
-        Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        ArrayList<CartData> cartList = (ArrayList<CartData>) args.getSerializable("cart_list");
+        homeList = ourInstance.getArray();
+
+        for(int i=0; i<homeList.size(); i++){
+            if(homeList.get(i).getmQuantity()> 0){
+                cartList.add(homeList.get(i));
+                totalAmountItems = totalAmountItems + homeList.get(i).getmAmount();
+            }
+        }
+        totalAmount.setText("Total Amount: " + totalAmountItems);
 
         mListView = findViewById(R.id.myCartListView);
-        mCartAdapter = new CartAdapter(this,R.layout.cart_listview ,cartList);
+        mCartAdapter = new CartAdapter(this,R.layout.cart_listview , cartList);
 
-        if(mListView != null){
+        if(mListView != null && homeList != null){
             mListView.setAdapter(mCartAdapter);
         }
 

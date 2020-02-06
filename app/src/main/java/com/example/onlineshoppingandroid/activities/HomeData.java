@@ -9,6 +9,7 @@ public class HomeData {
     private String mNameOfImage;
     private String mStockStatus;
     private String mDescription;
+    private int mAmount;
 
 
     public HomeData(String startNameOfProduct, int startPrice, int startStock, String startStockStatus, String startNameOfImage, String startDescription ) {
@@ -40,9 +41,9 @@ public class HomeData {
         return mPrice;
     }
 
-    public String setmStockStatus(String stockStatus) {
-        this.mStockStatus = stockStatus;
-        return mStockStatus;
+    public int setmAmount(int quantity) {
+        this.mAmount = quantity * mPrice;
+        return mAmount;
     }
 
     public String getmStockStatus() {
@@ -57,9 +58,14 @@ public class HomeData {
     }
 
     public int getmAmount() {
-        return mPrice * mQuantity;
+        this.mAmount = mPrice * mQuantity;
+        return mAmount;
     }
 
+    public String setmStockStatus(String stockStatus) {
+        this.mStockStatus = stockStatus;
+        return mStockStatus;
+    }
 
     public String getmNameOfImage() {
         return mNameOfImage;

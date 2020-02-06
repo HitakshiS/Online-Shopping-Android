@@ -2,6 +2,7 @@ package com.example.onlineshoppingandroid.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.onlineshoppingandroid.R;
+import com.example.onlineshoppingandroid.activities.DataSingleton;
 import com.example.onlineshoppingandroid.activities.HomeData;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
     Context mContext;
     ArrayList<HomeData> mData = null;
     int mLayoutResourceId;
+    DataSingleton ourInstance = DataSingleton.getInstance();
 
 
     public HomeAdapter(Context context, int resource, ArrayList<HomeData> data) {
@@ -33,7 +36,7 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View row = convertView;
         HomeHolder holder = null;
 
@@ -105,6 +108,7 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
         decrease.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                 home.removeFromQuantity();
                 int quantity = home.getmQuantity();
                 quantityTextView.setText("Quantity: " + quantity);
@@ -136,7 +140,6 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
         holder.quantityTextView.setText(quantityValue);
         int resId = mContext.getResources().getIdentifier(home.getmNameOfImage(),"drawable",mContext.getPackageName());
         holder.imageView.setImageResource(resId);
-
         return row;
     }
 

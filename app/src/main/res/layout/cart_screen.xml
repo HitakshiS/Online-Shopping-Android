@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDDDDD"
+    android:background="#FFFFFF"
     android:id="@+id/cartscreen">
     <include
         layout="@layout/header_custom"/>
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Total Amount: 0"
-        android:background="#B9F4A460"
+        android:background="#FFFFFF"
         android:textAlignment="center"
         android:textSize="30sp"
         android:id="@+id/cart_total_amount"/>

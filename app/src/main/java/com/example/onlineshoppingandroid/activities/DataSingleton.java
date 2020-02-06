@@ -6,7 +6,6 @@ public class DataSingleton {
     private static DataSingleton ourInstance;
     private ArrayList<HomeData> list = null;
 
-
     private DataSingleton() {
         list = new ArrayList<>();
     }
