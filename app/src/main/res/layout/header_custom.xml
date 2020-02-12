@@ -7,7 +7,7 @@
     android:paddingVertical="10dp"
     android:weightSum="10">
     <TextView
-        android:text="Home"
+        android:text="@string/home_str"
         android:textSize="32sp"
         android:id="@+id/header_text"
         android:textColor="#111111"

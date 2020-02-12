@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="Product: Broccoli"
+                    android:text="@string/product_initial"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -56,7 +56,7 @@
                     android:id="@+id/quantity_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Quantity: 0"
+                    android:text="@string/quantity_initial_str"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -65,7 +65,7 @@
                     android:id="@+id/price_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Price: 50"
+                    android:text="@string/price_initial_str"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -74,7 +74,7 @@
                     android:id="@+id/stock_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="In stock"
+                    android:text="@string/in_stock_str"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#008000"
                     android:textSize="18sp" />
@@ -83,7 +83,7 @@
                     android:id="@+id/description_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description: "
+                    android:text="@string/description_initial_str"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#000000"
                     android:textSize="18sp" />

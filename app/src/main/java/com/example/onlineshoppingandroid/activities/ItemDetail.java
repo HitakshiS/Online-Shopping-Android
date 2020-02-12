@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.onlineshoppingandroid.R;
+import com.example.onlineshoppingandroid.data.DataSingleton;
+import com.example.onlineshoppingandroid.data.HomeData;
 
 import java.util.ArrayList;
 
@@ -39,8 +39,14 @@ public class ItemDetail extends Activity {
         final Button increaseButton = findViewById(R.id.increase_item_button);
         final Button decreaseButton = findViewById(R.id.decrease_item_button);
 
-        customHeaderText.setText("Item Detail");
-        cartImage.setVisibility(View.INVISIBLE);
+        customHeaderText.setText(R.string.item_detail_str);
+        cartImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cartIntent = new Intent(getApplicationContext(), CartScreen.class);
+                startActivity(cartIntent);
+            }
+        });
 
         final Bundle extras = getIntent().getExtras();
 
@@ -70,19 +76,19 @@ public class ItemDetail extends Activity {
                         TextView quantityView = findViewById(R.id.quantity_item_text);
                         TextView quantityChange = findViewById(R.id.quantity_change_item_text);
                         TextView stockView = findViewById(R.id.stock_item_text);
-                        quantityView.setText("Quantity: " + quantity);
+                        quantityView.setText(String.format(getString(R.string.Quantity), quantity));
                         quantityChange.setText(String.valueOf(quantity));
                         int stock = list.get(position).getmStock();
 
                         decreaseButton.setBackgroundColor(Color.rgb(244, 164, 96));
                         if(quantity<stock){
-                            list.get(position).setmStockStatus("In Stock");
+                            list.get(position).setmStockStatus(getString(R.string.in_stock_str));
                             stockView.setText(list.get(position).getmStockStatus());
                             stockView.setTextColor(Color.rgb(0, 128, 0));
                             increaseButton.setBackgroundColor(Color.rgb(244, 164, 96));
                         }
                         else{
-                            list.get(position).setmStockStatus("Out of Stock");
+                            list.get(position).setmStockStatus(getString(R.string.out_of_stock_str));
                             stockView.setText(list.get(position).getmStockStatus());
                             stockView.setTextColor(Color.rgb(255, 0, 0));
                             increaseButton.setBackgroundColor(Color.rgb(169, 169, 169));
@@ -98,18 +104,18 @@ public class ItemDetail extends Activity {
                         TextView quantityView = findViewById(R.id.quantity_item_text);
                         TextView quantityChange = findViewById(R.id.quantity_change_item_text);
                         TextView stockView = findViewById(R.id.stock_item_text);
-                        quantityView.setText("Quantity: " + quantity);
+                        quantityView.setText(String.format(getString(R.string.Quantity), quantity));
                         quantityChange.setText(String.valueOf(quantity));
                         int stock = list.get(position).getmStock();
                         if(quantity>stock){
                             increaseButton.setBackgroundColor(Color.rgb(169, 169, 169));
-                            list.get(position).setmStockStatus("Out of Stock");
+                            list.get(position).setmStockStatus(getString(R.string.out_of_stock_str));
                             stockView.setTextColor(Color.rgb(255, 0, 0));
                             stockView.setText(list.get(position).getmStockStatus());
                         }
                         else{
                             increaseButton.setBackgroundColor(Color.rgb(244, 164, 96));
-                            list.get(position).setmStockStatus("In Stock");
+                            list.get(position).setmStockStatus(getString(R.string.in_stock_str));
                             stockView.setTextColor(Color.rgb(0, 128, 0));
                             stockView.setText(list.get(position).getmStockStatus());
                         }
@@ -118,12 +124,12 @@ public class ItemDetail extends Activity {
                         }
                     }
                 });
-                quantityView.setText("Quantity: "+ list.get(position).getmQuantity());
+                quantityView.setText(String.format(getString(R.string.Quantity), list.get(position).getmQuantity()));
                 quantityChange.setText(String.valueOf(list.get(position).getmQuantity()));
-                nameView.setText("Product: " + list.get(position).getmNameProduct());
-                priceView.setText("Price: " + list.get(position).getmPrice());
+                nameView.setText(String.format(getString(R.string.Product), list.get(position).getmNameProduct()));
+                priceView.setText(String.format(getString(R.string.Price), list.get(position).getmPrice()));
                 stockView.setText(list.get(position).getmStockStatus());
-                descriptionView.setText("Description: " + list.get(position).getmDescription());
+                descriptionView.setText(String.format(getString(R.string.Description), list.get(position).getmDescription()));
                 int resId = getApplicationContext().getResources().getIdentifier(list.get(position).getmNameOfImage(),"drawable",getApplicationContext().getPackageName());
                 imageView.setImageResource(resId);
             }

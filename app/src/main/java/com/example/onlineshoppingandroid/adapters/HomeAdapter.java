@@ -2,7 +2,6 @@ package com.example.onlineshoppingandroid.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.onlineshoppingandroid.R;
-import com.example.onlineshoppingandroid.activities.DataSingleton;
-import com.example.onlineshoppingandroid.activities.HomeData;
+import com.example.onlineshoppingandroid.data.DataSingleton;
+import com.example.onlineshoppingandroid.data.HomeData;
 
 import java.util.ArrayList;
 
@@ -76,7 +75,7 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
             stockTextView.setTextColor(Color.rgb(0, 128, 0));
         }
         else if (home.getmQuantity() >= home.getmStock()){
-            stockTextView.setText("Out of Stock");
+            stockTextView.setText(mContext.getString(R.string.out_of_stock_str));
             increase.setBackgroundColor(Color.rgb(169, 169, 169));
             decrease.setBackgroundColor(Color.rgb(244, 164, 96));
             stockTextView.setTextColor(Color.rgb(255, 0, 0));
@@ -87,18 +86,18 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
             public void onClick(View view) {
                 home.addToQuantity();
                 int quantity = home.getmQuantity();
-                quantityTextView.setText("Quantity: " +quantity);
+                quantityTextView.setText(String.format(mContext.getString(R.string.Quantity), quantity));
                 quantityView.setText(String.valueOf(quantity));
                 int stock = home.getmStock();
                 decrease.setBackgroundColor(Color.rgb(244, 164, 96));
                 if(quantity<stock){
-                    home.setmStockStatus("In Stock");
+                    home.setmStockStatus(mContext.getString(R.string.in_stock_str));
                     stockTextView.setText(home.getmStockStatus());
                     stockTextView.setTextColor(Color.rgb(0, 128, 0));
                     increase.setBackgroundColor(Color.rgb(244, 164, 96));
                 }
                 else{
-                    home.setmStockStatus("Out of Stock");
+                    home.setmStockStatus(mContext.getString(R.string.out_of_stock_str));
                     stockTextView.setText(home.getmStockStatus());
                     stockTextView.setTextColor(Color.rgb(255, 0, 0));
                     increase.setBackgroundColor(Color.rgb(169, 169, 169));
@@ -111,17 +110,17 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
 
                 home.removeFromQuantity();
                 int quantity = home.getmQuantity();
-                quantityTextView.setText("Quantity: " + quantity);
+                quantityTextView.setText(String.format(mContext.getString(R.string.Quantity), quantity));
                 quantityView.setText(String.valueOf(quantity));
                 int stock = home.getmStock();
                 if(quantity>stock){
                     increase.setBackgroundColor(Color.rgb(169, 169, 169));
-                    home.setmStockStatus("Out of Stock");
+                    home.setmStockStatus(mContext.getString(R.string.out_of_stock_str));
                     stockTextView.setText(home.getmStockStatus());
                 }
                 else{
                     increase.setBackgroundColor(Color.rgb(244, 164, 96));
-                    home.setmStockStatus("In Stock");
+                    home.setmStockStatus(mContext.getString(R.string.in_stock_str));
                     stockTextView.setTextColor(Color.rgb(0, 128, 0));
                     stockTextView.setText(home.getmStockStatus());
                 }
@@ -131,9 +130,9 @@ public class HomeAdapter extends ArrayAdapter<HomeData> {
             }
         });
 
-        String nameValue = "Product: "+ home.getmNameProduct();
-        String quantityValue = "Quantity: " + home.getmQuantity();
-        String priceValue = "Price: " + home.getmPrice();
+        String nameValue = String.format(mContext.getString(R.string.Product), home.getmNameProduct());
+        String quantityValue = String.format(mContext.getString(R.string.Quantity), home.getmQuantity());
+        String priceValue = String.format(mContext.getString(R.string.Price), home.getmPrice());
         holder.nameView.setText(nameValue);
         holder.price.setText(priceValue);
         quantityView.setText(String.valueOf(home.getmQuantity()));

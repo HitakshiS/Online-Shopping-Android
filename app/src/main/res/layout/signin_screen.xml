@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/signInScreen"
+    android:weightSum="10">
+    <include
+        layout="@layout/header_custom"/>
+
+    <TextView
+        android:id="@+id/signin_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_your_account"
+        android:textSize="28sp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_weight="2"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="@string/email"
+        android:backgroundTint="#F4A460"
+        android:paddingStart="10dp"
+        android:id="@+id/signin_email"
+        android:textColorHint="#F4A460"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="@string/password"
+        android:backgroundTint="#F4A460"
+        android:paddingStart="10dp"
+        android:id="@+id/signin_password"
+        android:textColorHint="#F4A460"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#F4A460"
+        android:text="@string/submit_details_btn"
+        android:textSize="16sp"
+        android:layout_weight="0.5"
+        android:layout_margin="20dp"
+        android:id="@+id/signin_submit_btn"/>
+
+    <Button
+        android:id="@+id/signin_signup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="0.5"
+        android:background="#F4A460"
+        android:text="@string/sign_up"
+        android:textSize="16sp" />
+</LinearLayout>

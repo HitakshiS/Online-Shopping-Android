@@ -5,149 +5,173 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.onlineshoppingandroid.R;
-import com.example.onlineshoppingandroid.activities.HomeData;
+import com.example.onlineshoppingandroid.data.HomeData;
 
 import java.util.ArrayList;
 
-public class CartAdapter extends ArrayAdapter<HomeData> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     Context mContext;
     ArrayList<HomeData> mData = null;
-    int mLayoutResourceId;
 
+    private OnItemClickListener onItemClickListener;
 
-    public CartAdapter(Context context, int resource, ArrayList<HomeData> data) {
-        super(context, resource, data);
+    public CartAdapter(Context context, ArrayList<HomeData> data) {
         this.mContext = context;
         this.mData = data;
-        this.mLayoutResourceId = resource;
+    }
+
+    @NonNull
+    @Override
+    public CartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.cart_listview, parent, false);
+
+        return new CartHolder(view);
     }
 
     @Override
-    public HomeData getItem(int position) {
-        return super.getItem(position);
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        CartAdapter.CartHolder holder = null;
-
-        if(row == null){
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            row = inflater.inflate(mLayoutResourceId,parent,false);
-
-            holder = new CartAdapter.CartHolder();
-
-            holder.nameView =  row.findViewById(R.id.cart_name);
-            holder.amount =  row.findViewById(R.id.cart_amount);
-            holder.stock =  row.findViewById(R.id.cart_stock);
-            holder.imageView =  row.findViewById(R.id.cart_image);
-
-            row.setTag(holder);
-        }
-        else{
-            holder = (CartAdapter.CartHolder) row.getTag();
-        }
+    public void onBindViewHolder(@NonNull final CartHolder holder, final int position) {
 
         final HomeData cart = mData.get(position);
 
-        final Button increase = row.findViewById(R.id.increase_button);
-        final Button decrease = row.findViewById(R.id.decrease_button);
-        final TextView quantityView = row.findViewById(R.id.quantity_text);
-        final TextView stockTextView = row.findViewById(R.id.cart_stock);
-        //final Button deleteItem = row.findViewById(R.id.delete_item);
-
-
         if(cart.getmQuantity() == 0 ){
-            decrease.setBackgroundColor(Color.rgb(169, 169, 169));
-            stockTextView.setTextColor(Color.rgb(0, 128, 0));
+            holder.decrease.setBackgroundColor(Color.rgb(169, 169, 169));
+            holder.stockTextView.setTextColor(Color.rgb(0, 128, 0));
         }
         else if(cart.getmQuantity() < cart.getmStock()){
-            decrease.setBackgroundColor(Color.rgb(244, 164, 96));
-            stockTextView.setTextColor(Color.rgb(0, 128, 0));
+            holder.decrease.setBackgroundColor(Color.rgb(244, 164, 96));
+            holder.stockTextView.setTextColor(Color.rgb(0, 128, 0));
         }
         else if (cart.getmQuantity() >= cart.getmStock()){
-            stockTextView.setText("Out of Stock");
-            increase.setBackgroundColor(Color.rgb(169, 169, 169));
-            decrease.setBackgroundColor(Color.rgb(244, 164, 96));
-            stockTextView.setTextColor(Color.rgb(255, 0, 0));
+            holder.stockTextView.setText(mContext.getString(R.string.out_of_stock_str));
+            holder.increase.setBackgroundColor(Color.rgb(169, 169, 169));
+            holder.decrease.setBackgroundColor(Color.rgb(244, 164, 96));
+            holder.stockTextView.setTextColor(Color.rgb(255, 0, 0));
         }
 
-//        deleteItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deleteItem.setVisibility(View.GONE);
-//            }
-//        });
-
-        increase.setOnClickListener(new View.OnClickListener() {
+        holder.increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cart.addToQuantity();
                 int quantity = cart.getmQuantity();
                 cart.setmAmount(quantity);
-                quantityView.setText(String.valueOf(quantity));
+                holder.quantityView.setText(String.valueOf(quantity));
+                holder.amount.setText(String.format(mContext.getString(R.string.Amount), cart.getmAmount()));
                 int stock = cart.getmStock();
-                decrease.setBackgroundColor(Color.rgb(244, 164, 96));
+                holder.decrease.setBackgroundColor(Color.rgb(244, 164, 96));
                 if(quantity<stock){
-                    cart.setmStockStatus("In Stock");
-                    stockTextView.setText(cart.getmStockStatus());
-                    stockTextView.setTextColor(Color.rgb(0, 128, 0));
-                    increase.setBackgroundColor(Color.rgb(244, 164, 96));
+                    cart.setmStockStatus(mContext.getString(R.string.in_stock_str));
+                    holder.stockTextView.setText(cart.getmStockStatus());
+                    holder.stockTextView.setTextColor(Color.rgb(0, 128, 0));
+                    holder.increase.setBackgroundColor(Color.rgb(244, 164, 96));
                 }
                 else{
-                    cart.setmStockStatus("Out of Stock");
-                    stockTextView.setText(cart.getmStockStatus());
-                    stockTextView.setTextColor(Color.rgb(255, 0, 0));
-                    increase.setBackgroundColor(Color.rgb(169, 169, 169));
+                    cart.setmStockStatus(mContext.getString(R.string.out_of_stock_str));
+                    holder.stockTextView.setText(cart.getmStockStatus());
+                    holder.stockTextView.setTextColor(Color.rgb(255, 0, 0));
+                    holder.increase.setBackgroundColor(Color.rgb(169, 169, 169));
                 }
+                onItemClickListener.onIncreaseDecreaseQuantity(position, true);
             }
         });
-        decrease.setOnClickListener(new View.OnClickListener() {
+        
+        holder.decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cart.removeFromQuantity();
                 int quantity = cart.getmQuantity();
                 cart.setmAmount(quantity);
-                quantityView.setText(String.valueOf(quantity));
+                holder.quantityView.setText(String.valueOf(quantity));
+                holder.amount.setText(String.format(mContext.getString(R.string.Amount), cart.getmAmount()));
                 int stock = cart.getmStock();
                 if(quantity>stock){
-                    increase.setBackgroundColor(Color.rgb(169, 169, 169));
-                    cart.setmStockStatus("Out of Stock");
-                    stockTextView.setText(cart.getmStockStatus());
+                    holder.increase.setBackgroundColor(Color.rgb(169, 169, 169));
+                    cart.setmStockStatus(mContext.getString(R.string.out_of_stock_str));
+                    holder.stockTextView.setText(cart.getmStockStatus());
                 }
                 else{
-                    increase.setBackgroundColor(Color.rgb(244, 164, 96));
-                    cart.setmStockStatus("In Stock");
-                    stockTextView.setTextColor(Color.rgb(0, 128, 0));
-                    stockTextView.setText(cart.getmStockStatus());
+                    holder.increase.setBackgroundColor(Color.rgb(244, 164, 96));
+                    cart.setmStockStatus(mContext.getString(R.string.in_stock_str));
+                    holder.stockTextView.setTextColor(Color.rgb(0, 128, 0));
+                    holder.stockTextView.setText(cart.getmStockStatus());
                 }
                 if(quantity==0){
-                    decrease.setBackgroundColor(Color.rgb(169, 169, 169));
+                    holder.decrease.setBackgroundColor(Color.rgb(169, 169, 169));
                 }
+                onItemClickListener.onIncreaseDecreaseQuantity(position, false);
             }
         });
 
-        String nameValue = "Product: "+ cart.getmNameProduct();
-        String priceValue = "Amount: " + cart.getmAmount();
+        String nameValue = String.format(mContext.getString(R.string.Product), cart.getmNameProduct());
+        String priceValue = String.format(mContext.getString(R.string.Amount), cart.getmAmount());
         holder.nameView.setText(nameValue);
         holder.amount.setText(priceValue);
-        quantityView.setText(String.valueOf(cart.getmQuantity()));
+        holder.quantityView.setText(String.valueOf(cart.getmQuantity()));
         int resId = mContext.getResources().getIdentifier(cart.getmNameOfImage(),"drawable",mContext.getPackageName());
         holder.imageView.setImageResource(resId);
-        return row;
+
     }
 
-    private static class CartHolder {
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+
+    public class CartHolder extends RecyclerView.ViewHolder {
+        ImageView deleteItem;
         TextView nameView;
         TextView amount;
-        TextView stock;
         ImageView imageView;
+
+        Button increase;
+        Button decrease;
+        TextView quantityView;
+        TextView stockTextView;
+
+        public CartHolder(@NonNull View itemView) {
+            super(itemView);
+
+            nameView =  itemView.findViewById(R.id.cart_name);
+            amount =  itemView.findViewById(R.id.cart_amount);
+            imageView =  itemView.findViewById(R.id.cart_image);
+
+            increase = itemView.findViewById(R.id.increase_button);
+            decrease = itemView.findViewById(R.id.decrease_button);
+            quantityView = itemView.findViewById(R.id.quantity_text);
+            stockTextView = itemView.findViewById(R.id.cart_stock);
+            deleteItem = itemView.findViewById(R.id.delete_item);
+
+
+            deleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener != null) {
+                        int adapterPosition = getAdapterPosition();
+
+                        if(adapterPosition > RecyclerView.NO_POSITION) {
+                            onItemClickListener.onDeleteClick(adapterPosition, mData.get(adapterPosition));
+                        }
+                    }
+                }
+            });
+
+        }
+    }
+    
+    public interface OnItemClickListener {
+        void onDeleteClick(int position, HomeData homeData);
+        void onIncreaseDecreaseQuantity(int position, Boolean increase);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

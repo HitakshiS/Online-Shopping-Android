@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cart_list_container"
-    android:background="#FFEFD5"
+    android:id="@+id/success_list_container"
+    android:background="#FFFFFF"
     android:padding="5dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="10dp"
     >
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="150dp"
-        app:layout_constraintWidth_percent="0.35"
-        android:id="@+id/cart_image"
+        app:layout_constraintWidth_percent="0.45"
+        android:id="@+id/success_image"
         android:scaleType="fitXY"
         android:src="@drawable/broccoli"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,22 +22,23 @@
         />
 
     <LinearLayout
-        android:id="@+id/cart_sub_container"
+        android:id="@+id/success_sub_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_alignStart="@id/cart_image"
+        android:layout_alignStart="@id/success_image"
         android:orientation="vertical"
         android:paddingLeft="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cart_image"
+        app:layout_constraintStart_toEndOf="@+id/success_image"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintWidth_percent="0.50"
         app:layout_constraintHeight_percent="1">
 
         <TextView
-            android:id="@+id/cart_name"
+            android:id="@+id/success_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:textSize="16sp"
             android:text="@string/product_initial"
@@ -45,43 +46,30 @@
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/cart_amount"
+            android:id="@+id/success_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity_initial_str"
+            android:textSize="16sp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/success_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_initial_str"
+            android:textSize="16sp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/success_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/amount_initial"
             android:textSize="16sp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/cart_stock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/in_stock_str"
-            android:textSize="16sp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#008000" />
-
-        <ImageView
-            android:id="@+id/delete_item"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scaleType="center"
-            android:src="@drawable/delete_item"
-            android:tint="#F44336"
-            android:visibility="visible" />
-
     </LinearLayout>
-
-    <include
-        layout="@layout/quantity_change"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cart_sub_container"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingLeft="15dp"
-        app:layout_constraintWidth_percent="0.15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

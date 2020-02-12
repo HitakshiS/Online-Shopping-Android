@@ -1,4 +1,4 @@
-package com.example.onlineshoppingandroid.activities;
+package com.example.onlineshoppingandroid.data;
 
 
 public class HomeData {
@@ -44,6 +44,11 @@ public class HomeData {
     public int setmAmount(int quantity) {
         this.mAmount = quantity * mPrice;
         return mAmount;
+    }
+
+    public void setmQuantity(int quantity) {
+        this.mQuantity = quantity;
+        return;
     }
 
     public String getmStockStatus() {

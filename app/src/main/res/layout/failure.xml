@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/homescreen"
-    android:weightSum="10"
-    android:layout_margin="10dp">
+    android:weightSum="10">
     <include
         layout="@layout/header_custom"/>
     <ImageView
@@ -19,7 +18,7 @@
         android:id="@+id/priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sorry your transaction has been unsuccessful!! Please try again."
+        android:text="@string/failure_msg_str"
         android:textSize="28sp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#DA3D32"
@@ -32,7 +31,7 @@
         android:id="@+id/stockTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="For successful transaction click on Place Your Order Button in Cart list and choose success from the pop-up menu."
+        android:text="@string/failure_txt_str"
         android:textSize="18sp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#008000"
@@ -44,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F4A460"
-        android:text="Move To Cart"
+        android:text="@string/move_to_cart_btn_str"
         android:textSize="18sp"
         android:layout_weight="0.5"
         android:id="@+id/failure_button"/>

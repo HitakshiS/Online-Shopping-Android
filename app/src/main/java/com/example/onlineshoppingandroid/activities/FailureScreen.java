@@ -19,17 +19,24 @@ public class FailureScreen extends Activity {
         TextView customHeaderText = findViewById(R.id.header_text);
         ImageView cartImage = findViewById(R.id.cart_imageView);
 
-        customHeaderText.setText("Payment Failed");
+        customHeaderText.setText(R.string.payment_failed_str);
         cartImage.setVisibility(View.INVISIBLE);
 
         Button cartNavigation = findViewById(R.id.failure_button);
         cartNavigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent failureIntent = new Intent(getApplicationContext(), CartScreen.class);
-                startActivity(failureIntent);
+                navigateToCart();
             }
         });
+    }
 
+    @Override
+    public void onBackPressed() {
+        navigateToCart();
+    }
+    public void navigateToCart() {
+        Intent cartIntent = new Intent(getApplicationContext(), CartScreen.class);
+        startActivity(cartIntent);
     }
 }
